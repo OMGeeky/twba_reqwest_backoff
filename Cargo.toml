@@ -1,5 +1,5 @@
 [package]
-name = "reqwest_backoff"
+name = "reqwest-backoff"
 version = "0.1.0"
 edition = "2021"
 
