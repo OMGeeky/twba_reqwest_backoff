@@ -20,7 +20,7 @@ pub enum ReqwestBackoffError {
     #[error("Reqwest error")]
     Reqwest(#[from] Error),
     #[error("Other error")]
-    Other(#[from] Box<dyn StdError>),
+    Other(#[from] Box<dyn StdError + Send + Sync>),
     #[error("Backoff error after {backoff_attempts} attempts")]
     BackoffExceeded { backoff_attempts: u32 },
 }
