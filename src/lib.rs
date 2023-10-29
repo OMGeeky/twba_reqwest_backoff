@@ -144,7 +144,7 @@ fn is_backoff_limit_reached(attempt: u32, host: HostType) -> bool {
 
 #[tracing::instrument]
 fn check_response_is_backoff(response: &Response, host: HostType) -> bool {
-    dbg!(response, host);
+    // dbg!(response, host);
     let code = response.status();
     if code.is_success() {
         return false;
@@ -166,7 +166,7 @@ fn check_response_is_backoff(response: &Response, host: HostType) -> bool {
 
 #[tracing::instrument]
 fn get_backoff_time(response: &Response, host: HostType, attempt: u32) -> Result<u64> {
-    dbg!(response, host);
+    // dbg!(response, host);
     Ok(match host {
         HostType::Twitch => {
             let timestamp = get_twitch_rate_limit_value(response)?;
