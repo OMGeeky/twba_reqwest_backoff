@@ -1,6 +1,6 @@
 use std::ops::Deref;
 
-use chrono::{DateTime, NaiveDateTime, Utc};
+use chrono::{DateTime, Utc};
 use reqwest::{Error, Request, Response};
 use url::Host;
 
@@ -201,8 +201,8 @@ fn get_twitch_rate_limit_value(response: &Response) -> Result<DateTime<Utc>> {
         .to_string()
         .parse::<i64>()
         .map_err(|e| ReqwestBackoffError::Other(e.into()))?;
-    let timestamp = NaiveDateTime::from_timestamp_opt(timestamp, 0).ok_or(
+    let timestamp: DateTime<Utc> = DateTime::from_timestamp(timestamp, 0).ok_or(
         ReqwestBackoffError::Other("Could not convert the provided timestamp".into()),
     )?;
-    Ok(timestamp.and_utc())
+    Ok(timestamp)
 }
